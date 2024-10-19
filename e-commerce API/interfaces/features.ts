@@ -15,7 +15,6 @@ export interface SearchQuery {
 export interface PaginationQuery {
   totalPages?: number;
   currentPage?: number;
-  limit?: number;
   next?: number;
   prev?: number;
 }

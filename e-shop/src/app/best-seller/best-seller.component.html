@@ -1,17 +1,16 @@
+<h1 class="text-center m-auto mt-4 p-2 bg-dark text-white w-25">Best Sellers</h1>
 <div class="row m-auto container mt-4">
   @for(product of products; track product._id){
   <div class="card m-2 col-4" style="width: 18rem;">
     <img [src]="imgDomain+product.cover" class="card-img-top w-100 h-50" [alt]="product.name">
     <div class="card-body position-relative">
-      <h5 class="card-title">{{product.name}}</h5>
-      <p class="card-text">{{product.description}}</p>
-      <!-- <p class="card-text">{{product.description|description:15}}</p> -->
-      <p class="card-text">price : {{product.price|currency}}</p>
-      <p class="card-text">{{product.ratingAverage|number:'1.1-1'}} &star; - count {{product.ratingCount}}</p>
+      <h5 class="card-title">{{product?.name}}</h5>
+      <p class="card-text">{{product?.description!|description:10}}...</p>
+      <p class="card-text">price : {{product?.price|currency:'EUR'}}</p>
+      <p class="card-text">{{product?.ratingAverage|number:'1.1-1'}} &star; - count {{product?.ratingCount}}</p>
       <div class="position-absolute btn-card">
         <a [routerLink]="['/products',product._id]" class="btn btn-primary mx-2">See More</a>
         <button class="btn btn-success mx-2">Add to Cart</button>
-        <!-- <button (click)="addToCart(product._id)" class="btn btn-success mx-2">Add to Cart</button> -->
       </div>
     </div>
   </div>

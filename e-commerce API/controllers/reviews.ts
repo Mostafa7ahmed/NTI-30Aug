@@ -9,6 +9,7 @@ export const filterReviews = (req: Request, res: Response, next: NextFunction) =
   let filterData: FilterData = {};
   if (req.params.productId) { filterData.product = req.params.productId };
   if (req.user?.role === 'user' && !req.params.productId) { filterData.user = req.user._id };
+  req.filterData = filterData;
   next();
 };
 export const setProductAndUserId = (req: Request, res: Response, next: NextFunction) => {

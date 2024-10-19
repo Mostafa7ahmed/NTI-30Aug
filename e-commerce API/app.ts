@@ -1,4 +1,4 @@
-import { Server } from 'http';
+ import { Server } from 'http';
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
@@ -15,7 +15,7 @@ import { I18n } from 'i18n';
 const app: express.Application = express()
 dotenv.config()
 app.use(cors({
-  origin: ['http://localhost:4200'],
+  origin: ['http://localhost:4200','http://localhost:50801'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token', 'X-API-KEY'],
   credentials: true

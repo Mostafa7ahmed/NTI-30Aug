@@ -33,7 +33,7 @@ export const protectRoutes = asyncHandler(async (req: Request, res: Response, ne
     token = req.headers.authorization.split(' ')[1];
   } else { return next(new ApiErrors('please login first', 401)) }
   // 2 - decoded token
-  const decodedToken: any = Jwt.verify(token, process.env.JWT_KEY!);
+  const decodedToken: any = Jwt.verify(token, process.env.JWT_SECRET_KEY!);
   // 3 - check if user still exists in db
   const user = await usersModel.findById(decodedToken._id);
   if (!user) { return next(new ApiErrors('user not found', 404)) }
@@ -84,7 +84,7 @@ export const verifyResetCode = asyncHandler(async (req: Request, res: Response, 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     resetToken = req.headers.authorization.split(' ')[1];
   } else { return next(new ApiErrors('get your reset code first', 400)) }
-  const decodedToken: any = Jwt.verify(resetToken, process.env.JWT_KEY!);
+  const decodedToken: any = Jwt.verify(resetToken, process.env.JWT_SECRET_KEY!);
   const hashedResetCode: string = crypto.createHash('sha256').update(req.body.resetCode).digest('hex');
   const user = await usersModel.findOne({
     _id: decodedToken._id,
@@ -103,7 +103,7 @@ export const resetCode = asyncHandler(async (req: Request, res: Response, next: 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     resetToken = req.headers.authorization.split(' ')[1];
   } else { return next(new ApiErrors("you can't do this action", 400)) }
-  const decodedToken: any = Jwt.verify(resetToken, process.env.JWT_KEY!);
+  const decodedToken: any = Jwt.verify(resetToken, process.env.JWT_SECRET_KEY!);
   const user = await usersModel.findOne({
     _id: decodedToken._id,
     resetCodeVerify: true

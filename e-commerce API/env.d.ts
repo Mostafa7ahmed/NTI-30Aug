@@ -4,7 +4,7 @@ declare namespace NodeJS {
     readonly DB: string;
     readonly NODE_ENV: 'development' | 'product'
     readonly BASE_URL: string;
-    readonly JWT_KEY: string;
+    readonly JWT_SECRET_KEY: string;
     readonly JWT_Expire: string;
     readonly JWT_RESET_EXPIRE: string;
     readonly EMAIL_HOST: string;

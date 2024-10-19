@@ -16,7 +16,7 @@ export const resizeUserImage = asyncHandler(async (req: Request, res: Response, 
     await sharp(req.file.buffer)
       .toFormat('webp')
       .webp({ quality: 95 })
-      .toFile(`uploads/users/${imgName}`)
+      .toFile(`uploads/images/users/${imgName}`)
     req.body.image = imgName;
   }
   next();

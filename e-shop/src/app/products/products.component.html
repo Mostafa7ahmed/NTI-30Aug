@@ -1,0 +1,57 @@
+<app-hero></app-hero>
+<div class="container d-flex mt-5 justify-content-around">
+  <div>
+    <input (keyup)="searchProducts(search.value)" #search class="form-control mx-2" type="search" placeholder="Search"
+      aria-label="Search">
+  </div>
+  <div>
+    <select class="form-select mx-2" aria-label="Default select example">
+      <option selected>Select Category</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <div>
+    <select class="form-select mx-2" aria-label="Default select example">
+      <option selected>Select Subcategory</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+</div>
+
+<div class="row m-auto container mt-4">
+  @for(product of products; track product._id){
+  <div class="card m-2 col-4" style="width: 18rem;">
+    <img [src]="imgDomain+product.cover" class="card-img-top w-100 h-50" [alt]="product.name">
+    <div class="card-body position-relative">
+      <h5 class="card-title">{{product?.name}}</h5>
+      <p class="card-text">{{product?.description!|description:10}}</p>
+      <p class="card-text">price : {{product?.price|currency:'EUR'}}</p>
+      <p class="card-text">{{product?.ratingAverage|number:'1.1-1'}} &star; - count {{product?.ratingCount}}</p>
+      <div class="position-absolute btn-card">
+        <a [routerLink]="[product._id]" class="btn btn-primary mx-2">See More</a>
+        <button class="btn btn-success mx-2">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+<div class="container m-auto mt-5 w-25">
+  <ul class="pagination">
+    <li (click)="changePage(1)" class="page-item"><button class="page-link">First</button></li>
+    @if(pagination.prev){
+    <li (click)="changePage(pagination.prev)" class="page-item"><button class="page-link">{{pagination.prev}}</button>
+    </li>
+    }
+    <li class="page-item"><button disabled class="page-link">{{pagination.currentPage}}</button></li>
+    @if(pagination.next){
+    <li (click)="changePage(pagination.next)" class="page-item"><button class="page-link">{{pagination.next}}</button>
+    </li>
+    }
+    <li (click)="changePage(pagination.totalPages!)" class="page-item"><button class="page-link">Last</button></li>
+  </ul>
+</div>

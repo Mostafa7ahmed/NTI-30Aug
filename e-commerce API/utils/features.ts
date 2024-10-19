@@ -42,8 +42,7 @@ class Features {
       if (modelName === 'products') {
         query.$or = [
           { name: new RegExp(this.queryString.search, 'i') },
-          { description: new RegExp(this.queryString.search, 'i') },
-          { price: new RegExp(this.queryString.search, 'i') }
+          { description: new RegExp(this.queryString.search, 'i') }
         ]
       } else { query = { name: new RegExp(this.queryString.search, 'i') } }
       this.mongooseQuery = this.mongooseQuery.find(query);
@@ -58,7 +57,6 @@ class Features {
     const endIndex: number = page * limit;
     const pagination: PaginationQuery = {}
     pagination.currentPage = Number(page);
-    pagination.limit = Number(limit);
     pagination.totalPages = Math.ceil(documentsCount / limit);
     if (endIndex < documentsCount) {
       pagination.next = Number(page) + 1;
